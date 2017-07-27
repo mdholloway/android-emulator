@@ -1,12 +1,12 @@
 #!/bin/bash
 
 if [[ $EMULATOR == "" ]]; then
-    EMULATOR="android-24"
+    EMULATOR="android-25"
     echo "Using default emulator $EMULATOR"
 fi
 
 if [[ $ARCH == "" ]]; then
-    ARCH="armeabi-v7a"
+    ARCH="x86"
     echo "Using default arch $ARCH"
 fi
 
@@ -23,5 +23,5 @@ else
     EMU="arm"
 fi
 
-echo "no" | /opt/android-sdk/tools/android create avd -f -n emulator -t ${EMULATOR} --abi default/${ARCH}
+echo "no" | /opt/android-sdk/tools/android create avd -f -n emulator -t ${EMULATOR} --abi google_apis/${ARCH}
 echo "no" | /opt/android-sdk/tools/emulator64-${EMU} -prop persist.sys.language=en -prop persist.sys.country=US -avd emulator -ports 5554,5555 -no-snapshot-load -no-snapshot-save -no-audio -no-window -no-boot-anim 

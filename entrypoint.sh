@@ -1,12 +1,12 @@
 #!/bin/bash
 
 if [[ $EMULATOR == "" ]]; then
-    EMULATOR="android-26"
+    EMULATOR="android-24"
     echo "Using default emulator $EMULATOR"
 fi
 
 if [[ $ARCH == "" ]]; then
-    ARCH="x86"
+    ARCH="armeabi-v7a"
     echo "Using default arch $ARCH"
 fi
 

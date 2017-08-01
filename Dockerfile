@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # Install OpenJDK 8 & other prereqs
 RUN apt-get -y update && \
-    apt-get -y install wget unzip git libqt5widgets5 kvm qemu-kvm libvirt-bin virtinst virt-viewer && \
+    apt-get -y install wget unzip git python-pil libqt5widgets5 kvm qemu-kvm libvirt-bin virtinst virt-viewer && \
     apt-get -y -t jessie-backports install openjdk-8-jre-headless ca-certificates-java && \
     apt-get -y install openjdk-8-jdk
 

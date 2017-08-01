@@ -21,6 +21,9 @@ RUN cd /opt && wget https://dl.google.com/android/repository/tools_r${ANDROID_SD
 ENV ANDROID_HOME /opt/android-sdk
 ENV PATH ${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools:${PATH}
 
+RUN mkdir -p ${ANDROID_HOME}/licenses
+RUN echo 8933bad161af4178b1185d1a37fbf41ea5269c55 > ${ANDROID_HOME}/licenses/android-sdk-license
+
 # Install latest android tools and system images
 RUN echo y | android update sdk -u -a -t platform-tools \
     && echo y | android update sdk -u -a -t build-tools-25.0.3 \

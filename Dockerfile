@@ -26,7 +26,7 @@ RUN echo 8933bad161af4178b1185d1a37fbf41ea5269c55 > ${ANDROID_HOME}/licenses/and
 
 # Install latest android tools and system images
 RUN echo y | android update sdk -u -a -t platform-tools \
-    && echo y | android update sdk -u -a -t build-tools-25.0.3 \
+    && echo y | android update sdk -u -a -t build-tools-26.0.0 \
     && echo y | android update sdk -u -a -t android-25 \
     && echo y | android update sdk -u -a -t sys-img-x86-google_apis-25 \
     && echo y | android update sdk -u -a -t sys-img-armeabi-v7a-google_apis-25

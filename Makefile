@@ -14,7 +14,7 @@ COLON := :
 .PHONY = run kill ps
 
 :
-	@docker build -q -t mdholloway/android-emalator-debian\:latest .
+	@docker build -q -t mdholloway/android-emulator-debian\:latest .
 	@docker images
 
 screenshots: run

@@ -6,28 +6,22 @@ ifneq "$(RUNNED)" ""
 IP := $(shell docker inspect $(ALIAS) | grep "IPAddress\"" | head -n1 | cut -d '"' -f 4)
 endif
 STALE_IMAGES := $(shell docker images | grep "<none>" | awk '{print($$3)}')
-EMULATOR ?= "android-24"
-ARCH ?= "armeabi-v7a"
+EMULATOR ?= "android-25"
+ARCH ?= "x86"
 
 COLON := :
 
-.PHONY = run ports kill ps
+.PHONY = run kill ps
 
 :
-	@docker build -q -t mdholloway/android-emulator-debian\:latest .
+	@docker build -q -t mdholloway/android-emalator-debian\:latest .
 	@docker images
 
-run: clean
-	@docker run -e "EMULATOR=$(EMULATOR)" -e "ARCH=$(ARCH)" -d -P --name android --log-driver=json-file mdholloway/android-emulator-debian
+screenshots: run
+	@docker exec $(ALIAS) scripts/apps-android-wikipedia-periodic-test && cp app/screenshots/* app/screenshots-ref && git commit -a -m "Update reference screenshots\n\n"
 
-ports:
-ifneq "$(RUNNED)" ""
-	$(eval ADBPORT := $(shell docker port $(ALIAS) | grep '5555/tcp' | awk '{split($$3,a,"$(COLON)");print a[2]}'))
-	@echo -e "Use:\n adb kill-server\n adb connect $(IP):$(ADBPORT)"
-	@echo -e "or\n adb connect 0.0.0.0:$(ADBPORT)"
-else
-	@echo "Run container"
-endif
+run: clean
+	@docker run -e "EMULATOR=$(EMULATOR)" -e "ARCH=$(ARCH)" -d -P --privileged --name android mdholloway/android-emulator-debian
 
 clean: kill
 	@docker ps -a -q | xargs -n 1 -I {} docker rm -f {}
